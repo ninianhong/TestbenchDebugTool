@@ -251,7 +251,7 @@ class DemoTabWidget(QMainWindow):
        layout.setStretch(0, 2)
        layout.setStretch(1, 11)
        
-       settingsLayOutOnRightFrame = QHBoxLayout(rightframe)      
+       #settingsLayOutOnRightFrame = QHBoxLayout(rightframe)      
        #twSetting = QTabWidget(settingsLayOutOnRightFrame)
        
        return wid
