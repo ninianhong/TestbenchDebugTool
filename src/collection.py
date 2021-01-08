@@ -122,9 +122,9 @@ class DemoTabWidget(QMainWindow):
         return wid
     
     def createSettingsTabWiget( self , index):
-       wid = QWidget() 
-       #create settings eara layout                 
+       wid = QWidget()                
        funLayout = QHBoxLayout(wid)
+       
        hwFrame =  QFrame( )
        hwFrame.setFrameStyle(QFrame.Box|QFrame.Raised)        
        recorderFrame =  QFrame( )
@@ -158,101 +158,29 @@ class DemoTabWidget(QMainWindow):
     
     def createTabWiget(self,index):
        wid = QWidget() 
-       layout = QHBoxLayout(wid)
-       ###################################################################
-       tree = QTreeWidget(self)                       # 2
-       tree.setColumnCount(1)
-       tree.setHeaderLabels([' ', ' '])
-       #tree.header().setVisible(False)
-       tree.header().setCascadingSectionResizes(True)
+       layout = QHBoxLayout(wid)      
 
-
-
-       #tree.itemClicked.connect(self.change_func)
- 
-       preview = QTreeWidgetItem(tree)                # 3
-       preview.setText(0, self.tr('Preview'))
- 
-        # self.preview = QTreeWidgetItem()
-        # self.preview.setText(0, 'Preview')
-        # self.tree.addTopLevelItem(self.preview)
- 
-       qt5112 = QTreeWidgetItem()                     # 4
-       qt5112.setText(0, self.tr('Qt 5.11.2 snapshot'))
-       qt5112.setCheckState(0, Qt.Unchecked)
-       preview.addChild(qt5112)
- 
-       choice_list = ['macOS', 'Android x86', 'Android ARMv7', 'Sources', 'iOS']
-       self.item_list = []
-       for i, c in enumerate(choice_list):            # 5
-            item = QTreeWidgetItem(qt5112)
-            item.setText(0, c)
-            item.setCheckState(0, Qt.Unchecked)
-            self.item_list.append(item)
- 
-       #test_item = QTreeWidgetItem(qt5112)           # 6
-       #test_item.setText(0, 'test1')
-       #test_item.setText(1, 'test2')
- 
-       tree.expandAll()                               # 7
-
-       ##################################################################
-
-
-       treeLayout = QHBoxLayout()
-       treeLayout.addWidget(tree)
-       
+       ########################################################################
+       treeLayout = QHBoxLayout()       
        treeframe = QFrame( )
        treeframe.setFrameStyle(QFrame.Box|QFrame.Raised) 
-       treeframe.setLayout(treeLayout)      
-       
+       treeframe.setLayout(treeLayout)             
        layout.addWidget(treeframe)
-       
-       ''''''
-       #create settings eara layout                 
-       funLayout = QHBoxLayout()
-       hwFrame =  QFrame( )
-       hwFrame.setFrameStyle(QFrame.Box|QFrame.Raised)        
-       recorderFrame =  QFrame( )
-       recorderFrame.setFrameStyle(QFrame.Box|QFrame.Raised)           
-       playFrame =  QFrame( )
-       
-       playFrame.setFrameStyle(QFrame.Box|QFrame.Raised)          
-       buttonFrame =  QFrame( )
-       buttonLayout = QVBoxLayout()
-       buttonFrame.setLayout(buttonLayout)
-       buttonNameList = [self.tr("settings"),self.tr("start"),self.tr("covert")]
-           
-       btn_settings = QPushButton(buttonNameList[0])           
-       buttonLayout.addWidget(btn_settings)
-       btn_start = QPushButton(buttonNameList[1])           
-       buttonLayout.addWidget(btn_start)  
-       btn_covert = QPushButton(buttonNameList[2])           
-       buttonLayout.addWidget(btn_covert) 
-       buttonLayout.addStretch(0)       
-       
-       funLayout.addWidget(hwFrame)
-       funLayout.addWidget(recorderFrame)
-       funLayout.addWidget(playFrame)
-       funLayout.addWidget(buttonFrame)
-       funLayout.setStretch(0, 4)
-       funLayout.setStretch(1, 4)
-       funLayout.setStretch(2, 4)       
-       funLayout.setStretch(3, 1)
-       
-       
+                   
        rightframe = QFrame( )
        rightframe.setFrameStyle(QFrame.Box|QFrame.Raised)  
-       rightframe.setLayout(funLayout)
        layout.addWidget(rightframe) 
-       
+       ########################################################################
        wid.setLayout(layout) 
        
        layout.setStretch(0, 2)
        layout.setStretch(1, 11)
        
-       #settingsLayOutOnRightFrame = QHBoxLayout(rightframe)      
-       #twSetting = QTabWidget(settingsLayOutOnRightFrame)
+   
+       twSetting = QTabWidget(rightframe)
+
+       twSetting.addTab(self.createSettingsTabWiget(0), self.tr('collection'))
+
        
        return wid
        
