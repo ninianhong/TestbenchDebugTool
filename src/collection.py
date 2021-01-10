@@ -15,6 +15,7 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget,
                              QPushButton,
                              QTreeWidget,
                              QTreeWidgetItem,
+                             QToolButton,
                              QFrame)
 
  
@@ -22,7 +23,7 @@ class DemoTabWidget(QMainWindow):
     def __init__(self, parent=None):
         super(DemoTabWidget, self).__init__(parent)   
         
-        self.setWindowTitle(self.tr('Collection') )     
+        self.setWindowTitle(self.tr('土豆') )     
         self.resize(480, 360)
       
         self.initUi()
@@ -39,7 +40,8 @@ class DemoTabWidget(QMainWindow):
         self.tw.addTab(self.createWidget(4), self.tr('详细信息'))
         self.tw.addTab(self.createWidget(5), self.tr('以前的版本'))
         self.tw.addTab(self.createTabWiget(6),self.tr('帧框'))
-        
+        self.tw.addTab(self.createSettingsTabWiget( 7 ), self.tr('咸肉'))
+
         self.setCentralWidget(self.tw)
         
             
@@ -117,22 +119,29 @@ class DemoTabWidget(QMainWindow):
         label.setFont(QFont(self.font().family(), 36))
         label.setText(self.tr("选项卡 {}").format(index + 1))
         
+        tb = QToolButton(self)
+        tb.setToolButtonStyle(Qt.ToolButtonIconOnly)
+        tb.setArrowType(Qt.LeftArrow)
+        
         layout.addWidget(label)
+        layout.addWidget(tb)
         wid.setLayout(layout)
         return wid
     
     def createSettingsTabWiget( self , index):
        wid = QWidget()                
        funLayout = QHBoxLayout(wid)
-       
-       hwFrame =  QFrame( )
-       hwFrame.setFrameStyle(QFrame.Box|QFrame.Raised)        
-       recorderFrame =  QFrame( )
+      
+       hwFrame =  QFrame(wid )
+       hwFrame.setFrameStyle(QFrame.Box|QFrame.Raised) 
+       hwFrame.resize(100, 200)       
+       recorderFrame =  QFrame(wid )
        recorderFrame.setFrameStyle(QFrame.Box|QFrame.Raised)           
-       playFrame =  QFrame( )
-       
+       playFrame =  QFrame(wid )      
        playFrame.setFrameStyle(QFrame.Box|QFrame.Raised)          
-       buttonFrame =  QFrame( )
+       buttonFrame =  QFrame(wid )
+       
+       ''' 
        buttonLayout = QVBoxLayout()
        buttonFrame.setLayout(buttonLayout)
        buttonNameList = [self.tr("settings"),self.tr("start"),self.tr("covert")]
@@ -143,17 +152,20 @@ class DemoTabWidget(QMainWindow):
        buttonLayout.addWidget(btn_start)  
        btn_covert = QPushButton(buttonNameList[2])           
        buttonLayout.addWidget(btn_covert) 
-       buttonLayout.addStretch(0)       
+       buttonLayout.addStretch(0) 
+        ''' 
        
        funLayout.addWidget(hwFrame)
        funLayout.addWidget(recorderFrame)
        funLayout.addWidget(playFrame)
        funLayout.addWidget(buttonFrame)
-       funLayout.setStretch(0, 4)
-       funLayout.setStretch(1, 4)
-       funLayout.setStretch(2, 4)       
-       funLayout.setStretch(3, 1)
        
+       #funLayout.setStretch(0, 4)
+       #funLayout.setStretch(1, 4)
+       #funLayout.setStretch(2, 4)       
+       #funLayout.setStretch(3, 1)
+       funLayout.setContentsMargins(0,0,0,0);
+       wid.setLayout(funLayout)
        return wid
     
     def createTabWiget(self,index):
@@ -176,10 +188,11 @@ class DemoTabWidget(QMainWindow):
        layout.setStretch(0, 2)
        layout.setStretch(1, 11)
        
-   
-       twSetting = QTabWidget(rightframe)
-
-       twSetting.addTab(self.createSettingsTabWiget(0), self.tr('collection'))
+       hlayoutForRightframe = QHBoxLayout(rightframe)
+       twSetting = QTabWidget()
+       hlayoutForRightframe.addWidget(twSetting)
+       twSetting.addTab(self.createSettingsTabWiget(0), self.tr('冬瓜'))
+       twSetting.addTab(self.createSettingsTabWiget(1), self.tr('咸排骨'))
 
        
        return wid
